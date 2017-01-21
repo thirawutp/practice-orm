@@ -1,27 +1,19 @@
-const express = require('express');
-const morgan = require('morgan');
-const app = express ();
+// const express = require('express');
+// const morgan = require('morgan');
+const User = require('./bookshelf');
+// const app = express ();
 
-var Client = require('mariasql');
+User
+  .query()
+  .where({id:3})
+  .then(function(model) {
+    console.log(model)
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
 
-app.get('/',(req,res,next)=>{
-  var c = new Client({
-    host: '139.59.233.25',
-    user: 'root',
-    password: 'password'
-  });
-
-  c.query('SHOW DATABASES', function(err, rows) {
-    if (err)
-      throw err;
-    console.dir(rows);
-  });
-
-  c.end();
-})
-
-
-
-app.listen(3000,()=>{
-  console.log('app run on localhost:3000');
-});
+//
+// app.listen(3001,()=>{
+//   console.log('app run on localhost:3000');
+// });
